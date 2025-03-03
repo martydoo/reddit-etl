@@ -173,8 +173,9 @@ class RedditETL:
 
 def etl_factory(site):
     """
-    Factory to specify post data source. Currently only supports Reddit,
-    but can be extended in the future to pull data from other platforms.
+    Factory to select pipeline based on post data source. Currently only
+    supports Reddit, but can be extended in the future to pull from other 
+    platforms.
 
     Args:
         site (str): Site to extract data from. Defaults to Reddit.
