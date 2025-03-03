@@ -41,12 +41,14 @@ class RedditETL:
     and load into a local SQLite database.
     """
 
-    def extract(self, sub, num_posts, client):
+    def extract(self, sub, sort_by, num_posts, client):
         """
         Extract posts from community.
 
         Args:
             sub (str): SubReddit to pull from.
+            sort_by (str): Sort method for posts. Defaults to hot.
+                [hot, new, top] are valid options. `top` filters by all-time.
             num_posts (int): Number of posts to retrieve.
             client (praw.Reddit): Client used to interact with Reddit.
 
@@ -58,10 +60,18 @@ class RedditETL:
             raise ValueError("Must pass client object.")
 
         subreddit = client.subreddit(sub)
-        popular_posts = subreddit.hot(limit=num_posts)
+
+        match sort_by:
+            case "new":
+                posts = subreddit.new(limit=num_posts)
+            case "top":
+                posts = subreddit.top(time_filter="all", limit=num_posts)
+            case _:
+                posts = subreddit.hot(limit=num_posts)
+
         reddit_data = []
 
-        for submission in popular_posts:
+        for submission in posts:
             reddit_data.append(
                 RedditPostData(
                     id=submission.id,
@@ -128,7 +138,15 @@ class RedditETL:
                     },
                 )
 
-    def run(self, cursor, client, transform_function, sub="all", num_posts=50):
+    def run(
+        self,
+        cursor,
+        client,
+        transform_function,
+        sub="all",
+        sort_by="hot",
+        num_posts=50,
+    ):
         """
         Run ETL pipeline.
 
@@ -137,12 +155,14 @@ class RedditETL:
             client (praw.Reddit): Client used to interact with Reddit.
             transform_function (Callable): Filter to apply to posts.
             sub (str): SubReddit to pull from.
+            sort_by (str): Sort method for posts. Defaults to hot.
+                [hot, new, top] are valid options. `top` filters by all-time.
             num_posts (int): Number of posts to retrieve.
         """
         logger.info("Running Reddit ETL pipeline.")
 
-        # Extract `num_posts` from `sub` community using `client`
-        raw_data = self.extract(sub, num_posts, client)
+        # Extract `num_posts` submissions from `sub` using `client`
+        raw_data = self.extract(sub, sort_by, num_posts, client)
 
         # Filter `raw_data` based on `transform_function` filter
         transformed_data = self.transform(raw_data, transform_function)
