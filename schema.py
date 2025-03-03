@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 def construct():
     """Setup database schema."""
-    db = db_factory()  # type: ignore
+    db = db_factory('sqlite3', 'reddit.db')
     with db.managed_cursor() as cur:
         logger.info("Creating posts table.")
         cur.execute(
@@ -31,7 +31,7 @@ def construct():
 
 def teardown():
     """Drop database schema."""
-    db = db_factory()  # type: ignore
+    db = db_factory('sqlite3', 'reddit.db')
     with db.managed_cursor() as cur:
         logger.info("Dropping posts table.")
         cur.execute(
