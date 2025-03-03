@@ -2,10 +2,11 @@ import argparse
 import logging
 
 from db import db_factory
-from reddit import etl_factory
+from etl import etl_factory
 from transform import transformation_factory
 
 logger = logging.getLogger(__name__)
+
 
 def main(source, sub, sort_by, transformation):
     """
@@ -19,56 +20,56 @@ def main(source, sub, sort_by, transformation):
             Defaults to `zero` transformation.
     """
     logger.info("Starting ETL.")
-    
+
     logger.info("Retrieving ETL object from factory.")
     client, pipeline = etl_factory(source)
 
     logger.info("Initializing database.")
     db = db_factory()
-    
+
     logger.info("Running pipeline.")
     pipeline.run(
         db.managed_cursor(),
         client,
         transformation_factory(transformation),
         sub,
-        sort_by
+        sort_by,
     )
-    
+
     logger.info("Pipeline completed.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--source',
-        choices=['reddit'],
-        default='reddit',
+        "--source",
+        choices=["reddit"],
+        default="reddit",
         type=str,
-        help='Site to extract data from. Currently only supports `reddit`.'
+        help="Site to extract data from. Currently only supports `reddit`.",
     )
     parser.add_argument(
-        '--sub',
-        default='all',
+        "--sub",
+        default="all",
         type=str,
-        help='SubReddit to pull from. Defaults to `all`.'
+        help="SubReddit to pull from. Defaults to `all`.",
     )
     parser.add_argument(
-        '--sort',
-        choices=['hot', 'new', 'top'],
-        default='hot',
+        "--sort",
+        choices=["hot", "new", "top"],
+        default="hot",
         type=str,
-        help='Sort method for posts. Defaults to `hot`.'
+        help="Sort method for posts. Defaults to `hot`.",
     )
     parser.add_argument(
-        '--filter',
-        choices=['zero', 'random', 'discussion', 'popular'],
-        default='zero',
+        "--filter",
+        choices=["zero", "random", "discussion", "popular"],
+        default="zero",
         type=str,
-        help='Filter to apply to extracted data. Defaults to `zero`.'
+        help="Filter to apply to extracted data. Defaults to `zero`.",
     )
-    
+
     args = parser.parse_args()
-    logging.basicConfig(filename='etl.log', level=logging.INFO)
-    
+    logging.basicConfig(filename="etl.log", level=logging.INFO)
+
     main(args.source, args.sub, args.sort, args.filter)
