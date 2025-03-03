@@ -159,7 +159,6 @@ class RedditETL:
                 [hot, new, top] are valid options. `top` filters by all-time.
             num_posts (int): Number of posts to retrieve.
         """
-        logger.info("Running Reddit ETL pipeline.")
 
         # Extract `num_posts` submissions from `sub` using `client`
         raw_data = self.extract(sub, sort_by, num_posts, client)
@@ -174,7 +173,7 @@ class RedditETL:
 def etl_factory(site):
     """
     Factory to select pipeline based on post data source. Currently only
-    supports Reddit, but can be extended in the future to pull from other 
+    supports Reddit, but can be extended in the future to pull from other
     platforms.
 
     Args:
