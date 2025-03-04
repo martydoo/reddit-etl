@@ -1,6 +1,7 @@
 import logging
 import os
 from dataclasses import dataclass
+from datetime import datetime
 
 import praw
 from dotenv import load_dotenv
@@ -21,7 +22,7 @@ class RedditPostData:
         score (int): Post score.
         url (str): Post URL.
         comments (int): Number of comments.
-        created (str): Creation datetime.
+        created (datetime): Creation datetime.
         text (str): Post contents.
     """
 
@@ -31,7 +32,7 @@ class RedditPostData:
     score: int
     url: str
     comments: int
-    created: str
+    created: datetime
     text: str
 
 
@@ -72,15 +73,19 @@ class RedditETL:
         reddit_data = []
 
         for submission in posts:
+            # Convert from UNIX time to UTC
+            created_utc = submission.created_utc
+            created_date = datetime.utcfromtimestamp(created_utc)
+            
             reddit_data.append(
                 RedditPostData(
                     id=submission.id,
-                    community=submission.subreddit.name,
+                    community=submission.subreddit.display_name,
                     title=submission.title,
                     score=submission.score,
                     url=submission.url,
                     comments=submission.num_comments,
-                    created=str(submission.created_utc),
+                    created=created_date,
                     text=submission.selftext,
                 )
             )

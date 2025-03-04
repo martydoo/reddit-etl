@@ -1,9 +1,9 @@
 import argparse
 import logging
 
-from db import db_factory
-from etl import etl_factory
-from transform import transformation_factory
+from core.db import db_factory
+from core.etl import etl_factory
+from core.transform import transformation_factory
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +70,10 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    logging.basicConfig(filename="etl.log", level=logging.INFO)
+    logging.basicConfig(
+        filename="etl.log", 
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        level=logging.INFO)
 
     main(args.source, args.sub, args.sort, args.filter)

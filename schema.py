@@ -1,7 +1,7 @@
 import argparse
 import logging
 
-from db import db_factory
+from core.db import db_factory
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ def construct():
                 score INT,
                 url TEXT,
                 comments INT,
-                created TEXT,
+                created DATETIME,
                 text TEXT,
                 modified DATETIME DEFAULT CURRENT_TIMESTAMP
             )

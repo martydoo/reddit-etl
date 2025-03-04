@@ -48,8 +48,8 @@ def db_factory(db_type=None, db_file=None):
     """
     kwargs = {}
     if db_type is not None:
-        kwargs['db_type'] = db_type
+        kwargs["db_type"] = db_type
     if db_file is not None:
-        kwargs['db_file'] = db_file 
-    
+        kwargs["db_file"] = db_file
+
     return DatabaseConnection(**kwargs)

@@ -3,6 +3,7 @@ import random
 
 import numpy as np
 
+logger = logging.getLogger(__name__)
 
 def zero_transformation(data):
     """
@@ -14,7 +15,7 @@ def zero_transformation(data):
     Returns:
         List[RedditPostData]: Filtered list of Reddit submission data.
     """
-    logging.info("No transformation applied.")
+    logger.info("No transformation applied.")
     return data
 
 
@@ -28,7 +29,7 @@ def random_transformation(data):
     Returns:
         List[RedditPostData]: Filtered list of Reddit submission data.
     """
-    logging.info("Randomly selecting five posts.")
+    logger.info("Randomly selecting five posts.")
     posts = random.choices(data, k=5)
     return posts
 
@@ -43,7 +44,7 @@ def discussion_transformation(data):
     Returns:
         List[RedditPostData]: Filtered list of Reddit submission data.
     """
-    logging.info("Keeping posts with one or more comments.")
+    logger.info("Keeping posts with one or more comments.")
     posts = [post for post in data if post.comments > 0]
     return posts
 
@@ -59,7 +60,7 @@ def popular_transformation(data):
     Returns:
         List[RedditPostData]: Filtered list of Reddit submission data.
     """
-    logging.info("Finding the most popular posts.")
+    logger.info("Finding the most popular posts.")
     upvotes = np.array([post.score for post in data])
 
     mean_upvotes = upvotes.mean()
