@@ -5,7 +5,7 @@ from contextlib import contextmanager
 class DatabaseConnection:
     """Class to connect to a database."""
 
-    def __init__(self, db_type, db_file):
+    def __init__(self, db_type="sqlite3", db_file="reddit.db"):
         """
         Initializes database connection object.
 
@@ -35,7 +35,7 @@ class DatabaseConnection:
                 _con.close()
 
 
-def db_factory(db_type="sqlite3", db_file="reddit.db"):
+def db_factory(db_type=None, db_file=None):
     """
     Create a database connection object.
 
@@ -46,4 +46,10 @@ def db_factory(db_type="sqlite3", db_file="reddit.db"):
     Returns:
         DatabaseConnection: Database connection object.
     """
-    return DatabaseConnection(db_type, db_file)
+    kwargs = {}
+    if db_type is not None:
+        kwargs['db_type'] = db_type
+    if db_file is not None:
+        kwargs['db_file'] = db_file 
+    
+    return DatabaseConnection(**kwargs)
