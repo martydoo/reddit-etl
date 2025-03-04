@@ -71,9 +71,10 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     logging.basicConfig(
-        filename="etl.log", 
+        filename="etl.log",
         format="%(asctime)s - %(levelname)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
-        level=logging.INFO)
+        level=logging.INFO,
+    )
 
     main(args.source, args.sub, args.sort, args.filter)

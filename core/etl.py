@@ -76,7 +76,7 @@ class RedditETL:
             # Convert from UNIX time to UTC
             created_utc = submission.created_utc
             created_date = datetime.utcfromtimestamp(created_utc)
-            
+
             reddit_data.append(
                 RedditPostData(
                     id=submission.id,

@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 def construct():
     """Setup database schema."""
-    db = db_factory("sqlite3", "reddit.db")
+    db = db_factory()
     with db.managed_cursor() as cur:
         logger.info("Creating posts table.")
         cur.execute(
@@ -31,7 +31,7 @@ def construct():
 
 def teardown():
     """Drop database schema."""
-    db = db_factory("sqlite3", "reddit.db")
+    db = db_factory()
     with db.managed_cursor() as cur:
         logger.info("Dropping posts table.")
         cur.execute(
@@ -49,7 +49,12 @@ if __name__ == "__main__":
         "--reset-db", action="store_true", help="Reset database schema."
     )
     args = parser.parse_args()
-    logging.basicConfig(filename="etl.log", level=logging.INFO)
+    logging.basicConfig(
+        filename="etl.log",
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        level=logging.INFO,
+    )
 
     if args.reset_db:
         teardown()

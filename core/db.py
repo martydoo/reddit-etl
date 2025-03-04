@@ -5,13 +5,13 @@ from contextlib import contextmanager
 class DatabaseConnection:
     """Class to connect to a database."""
 
-    def __init__(self, db_type="sqlite3", db_file="reddit.db"):
+    def __init__(self, db_type="sqlite3", db_file="data/reddit.db"):
         """
         Initializes database connection object.
 
         Args:
             db_type (str): Database to use. Defaults to SQLite3.
-            db_file (str): File to contain database. Defaults to 'reddit.db'.
+            db_file (str): File to contain database. Defaults to 'data/reddit.db'.
         """
         self._db_type = db_type
         self._db_file = db_file
@@ -41,7 +41,7 @@ def db_factory(db_type=None, db_file=None):
 
     Args:
         db_type (str): Database to use. Defaults to SQLite3.
-        db_file (str): File to contain database. Defaults to 'reddit.db'.
+        db_file (str): File to contain database. Defaults to 'data/reddit.db'.
 
     Returns:
         DatabaseConnection: Database connection object.
