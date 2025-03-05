@@ -1,9 +1,9 @@
 import logging
 
 from config.defaults import DEFAULTS
-from core.db import db_factory
-from core.etl import etl_factory
-from core.transform import transformation_factory
+from src.core.db import db_factory
+from src.core.etl import etl_factory
+from src.core.transform import transformation_factory
 
 logger = logging.getLogger(__name__)
 

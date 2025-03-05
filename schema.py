@@ -1,7 +1,7 @@
 import argparse
 import logging
 
-from core.db import db_factory
+from src.core.db import db_factory
 
 logger = logging.getLogger(__name__)
 
