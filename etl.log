@@ -36,3 +36,16 @@
 2025-03-05 09:54:26 - INFO - Randomly selecting five posts.
 2025-03-05 09:54:26 - INFO - Loading posts.
 2025-03-05 09:54:26 - INFO - Pipeline completed.
+2025-03-05 13:26:55 - INFO - Dropping posts table.
+2025-03-05 13:26:55 - INFO - Creating posts table.
+2025-03-05 13:29:34 - INFO - Dropping posts table.
+2025-03-05 13:29:34 - INFO - Creating posts table.
+2025-03-05 13:44:48 - INFO - Starting ETL.
+2025-03-05 13:44:48 - INFO - Retrieving ETL object from factory.
+2025-03-05 13:44:48 - INFO - Initializing database.
+2025-03-05 13:44:48 - INFO - Running pipeline.
+2025-03-05 13:44:48 - INFO - Extracting posts.
+2025-03-05 13:44:49 - INFO - Transforming posts.
+2025-03-05 13:44:49 - INFO - No transformation applied.
+2025-03-05 13:44:49 - INFO - Loading posts.
+2025-03-05 13:44:49 - INFO - Pipeline completed.

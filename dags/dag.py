@@ -28,10 +28,9 @@ def reddit_etl():
     @task.bash
     def generate_csv():
         return f"""
-            cd {DEFAULTS["db_file"].replace("reddit.db", "")} && \
-            chmod +x generate_csv.sh && \
+            chmod +x {DEFAULTS["db_file"].replace('reddit.db', '')} && \
             DB_PATH={DEFAULTS["db_file"]} && \
-            ./generate_csv.sh
+            {DEFAULTS["db_file"].replace('reddit.db', 'generate_csv.sh')}
         """
 
     execute_etl() >> generate_csv()  # type: ignore
