@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-# Get reddit-etl folder
+# Get reddit-etl folder (defaults.py > config > src > reddit-etl)
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
 # Use environment path if running with Docker, normal path otherwise

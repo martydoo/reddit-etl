@@ -1,8 +1,8 @@
 import argparse
 import logging
 
-from config.defaults import DEFAULTS
-from main import run_etl
+from src.config.defaults import DEFAULTS
+from src.main import run_etl
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

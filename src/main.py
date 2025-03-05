@@ -1,6 +1,6 @@
 import logging
 
-from config.defaults import DEFAULTS
+from src.config.defaults import DEFAULTS
 from src.core.db import db_factory
 from src.core.etl import etl_factory
 from src.core.transform import transformation_factory
