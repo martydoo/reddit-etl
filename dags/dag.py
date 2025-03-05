@@ -7,7 +7,7 @@ from ..config.defaults import DEFAULTS
 default_args = {
     "start_date": datetime(2025, 1, 1),
     "retries": 2,
-    "retry_delay": timedelta(minutes=5),
+    "retry_delay": timedelta(minutes=1),
 }
 
 
