@@ -18,3 +18,21 @@
 2025-03-04 15:14:44 - INFO - Keeping posts with one or more comments.
 2025-03-04 15:14:44 - INFO - Loading posts.
 2025-03-04 15:14:44 - INFO - Pipeline completed.
+2025-03-05 09:52:08 - INFO - Starting ETL.
+2025-03-05 09:52:08 - INFO - Retrieving ETL object from factory.
+2025-03-05 09:52:08 - INFO - Initializing database.
+2025-03-05 09:52:08 - INFO - Running pipeline.
+2025-03-05 09:52:08 - INFO - Extracting posts.
+2025-03-05 09:52:09 - INFO - Transforming posts.
+2025-03-05 09:52:09 - INFO - Finding the most popular posts.
+2025-03-05 09:52:09 - INFO - Loading posts.
+2025-03-05 09:52:09 - INFO - Pipeline completed.
+2025-03-05 09:54:25 - INFO - Starting ETL.
+2025-03-05 09:54:25 - INFO - Retrieving ETL object from factory.
+2025-03-05 09:54:25 - INFO - Initializing database.
+2025-03-05 09:54:25 - INFO - Running pipeline.
+2025-03-05 09:54:25 - INFO - Extracting posts.
+2025-03-05 09:54:26 - INFO - Transforming posts.
+2025-03-05 09:54:26 - INFO - Randomly selecting five posts.
+2025-03-05 09:54:26 - INFO - Loading posts.
+2025-03-05 09:54:26 - INFO - Pipeline completed.

@@ -5,6 +5,7 @@ import numpy as np
 
 logger = logging.getLogger(__name__)
 
+
 def zero_transformation(data):
     """
     Does not apply any filters to the data.
