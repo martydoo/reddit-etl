@@ -1,10 +1,15 @@
 FROM apache/airflow:2.7.3-python3.10
 
-WORKDIR /app
+WORKDIR /opt/airflow
 
-# Copy entire project structure
-COPY . .
+# Copy necessary directories
+COPY ./dags ./dags
+COPY ./src ./src
+COPY ./data ./data
+COPY setup.py .
 
 RUN pip install -e .
 
-RUN chmod +x /app/data/generate_csv.sh
+RUN chmod +x /opt/airflow/data/generate_csv.sh
+
+USER airflow

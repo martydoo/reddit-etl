@@ -2,15 +2,16 @@ services:
   airflow:
     build: .
     volumes:
-      - ./dags:/app/dags
-      - ./data:/app/data
-      - ./logs:/app/logs
+      - ./dags:/opt/airflow/dags
+      - ./src:/opt/airflow/src
+      - ./data:/opt/airflow/data
+      - ./logs:/opt/airflow/logs
       - ./.airflow:/opt/airflow
     environment:
       - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
-      - ETL_DB_PATH=/app/data/reddit.db
-      - PYTHONPATH=/app/src
+      - ETL_DB_PATH=/opt/airflow/data/reddit.db
+      - PYTHONPATH=/opt/airflow/src
     ports:
       - "8080:8080"
     command: standalone
