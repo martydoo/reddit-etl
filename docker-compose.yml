@@ -11,7 +11,7 @@ services:
       - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - ETL_DB_PATH=/opt/airflow/data/reddit.db
-      - PYTHONPATH=/opt/airflow/src:${PYTHONPATH}
+      - PYTHONPATH=/opt/airflow/src:${PYTHONPATH:-}
     ports:
       - "8080:8080"
     command: standalone
