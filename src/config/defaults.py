@@ -10,7 +10,7 @@ DB_PATH = Path(os.getenv("ETL_DB_PATH", PROJECT_ROOT / "data" / "reddit.db"))
 DEFAULTS = {
     "source": "reddit",
     "sub": "all",
-    "sort": "hot",
+    "sort_by": "hot",
     "filter": "zero",
     "db_file": str(DB_PATH),
 }

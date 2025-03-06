@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 def run_etl(
     source=DEFAULTS["source"],
     sub=DEFAULTS["sub"],
-    sort_by=DEFAULTS["sort"],
+    sort_by=DEFAULTS["sort_by"],
     transformation=DEFAULTS["filter"],
     db=None,
 ):

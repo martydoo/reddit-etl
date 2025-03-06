@@ -1,16 +1,11 @@
-FROM apache/airflow:latest
+FROM apache/airflow:2.10.5
 COPY requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 
-# Copy necessary directories
-COPY ./dags ./dags
-COPY ./src ./src
-COPY ./data ./data
-COPY setup.py .
-
+WORKDIR /opt/airflow
 USER root
+COPY . .
 RUN chmod -R 777 .
-RUN chmod +x /opt/airflow/data/generate_csv.sh
 
 USER airflow
 RUN pip install -e .

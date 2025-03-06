@@ -22,7 +22,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--sort",
         choices=["hot", "new", "top"],
-        default=DEFAULTS["sort"],
+        default=DEFAULTS["sort_by"],
         type=str,
         help="Sort method for posts. Defaults to `hot`.",
     )
