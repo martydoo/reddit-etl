@@ -11,6 +11,6 @@ DEFAULTS = {
     "source": "reddit",
     "sub": "all",
     "sort_by": "hot",
-    "filter": "zero",
+    "transformation": "zero",
     "db_file": str(DB_PATH),
 }

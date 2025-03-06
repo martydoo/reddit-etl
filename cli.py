@@ -29,7 +29,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--filter",
         choices=["zero", "random", "discussion", "popular"],
-        default=DEFAULTS["filter"],
+        default=DEFAULTS["transformation"],
         type=str,
         help="Filter to apply to extracted data. Defaults to `zero`.",
     )

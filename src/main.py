@@ -12,7 +12,7 @@ def run_etl(
     source=DEFAULTS["source"],
     sub=DEFAULTS["sub"],
     sort_by=DEFAULTS["sort_by"],
-    transformation=DEFAULTS["filter"],
+    transformation=DEFAULTS["transformation"],
     db=None,
 ):
     """
