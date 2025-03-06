@@ -31,17 +31,19 @@ After the ETL pipeline is run, the shell script, ```generate_csv.sh```, serves t
 A script, ```schema.py```, is also included to make schema creation and deletion easier.
 
 ## Setup
-Before running the pipeline, the database should be reset using:
+Before running the pipeline for the first time, the database should be reset using:
 
 ```python3 schema.py --reset-db```
 
+This can, of course, be run at any time a clean slate is desired.
+
 Instructions for setting up the ```.env``` file can be found in Machado's repo. 
 
-As stated before, ```cli.py``` can be used when scheduled runs are not required. Command-line arguments allow for customization of post sorting method (hot [default], new, top) and filter (zero [default], random, discussion, popular), as well as Subreddit selection (default is 'all'). For example:
+As stated before, ```cli.py``` can be used when scheduled runs are not required. Command-line arguments allow for customization of post sorting method (hot [default], new, top) and filter (zero [default], random, discussion, popular), as well as SubReddit selection (default is 'all'). For example:
 
 ```python3 cli.py --sub pinball --sort top --filter random```
 
-If one wishes to start the DAG, it's fairly easy as Docker eliminates the need to install Airflow separately. Installation of all dependencies and Airflow UI setup is handled through:
+If one wishes to start the DAG, it's fairly easy to do so as Docker eliminates the need to install Airflow separately. Installation of all dependencies and Airflow UI setup is handled through:
 
 ```docker-compose up --build```
 
@@ -60,4 +62,4 @@ Ctrl+C will shut down the Airflow service, and the Docker container can be stopp
 * Components I wish to extend
 
 ## Acknowledgements
-Thank you to Joseph Machado for making the original project's repo publically available, and for making data engineering feel accessible through his [blog](https://www.startdataengineering.com/), even to a beginner like myself.
+Thank you to Joseph Machado for making the original project's repo publicly available, and for making data engineering feel so accessible through his [blog](https://www.startdataengineering.com/), even to a beginner like myself.
