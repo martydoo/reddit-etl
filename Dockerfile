@@ -8,7 +8,7 @@ USER root
 COPY . .
 RUN chmod -R 777 .
 
-ENV PYTHONPATH /opt/airflow/src
+ENV PYTHONPATH="/opt/airflow/src"
 
 USER airflow
 RUN pip install -e .

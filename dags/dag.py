@@ -1,7 +1,6 @@
 from airflow.decorators import dag, task
 from datetime import datetime, timedelta
 from src.main import run_etl
-from src.core.db import db_factory
 from src.config.defaults import DEFAULTS
 
 default_args = {
@@ -22,8 +21,7 @@ default_args = {
 def reddit_etl():
     @task
     def execute_etl(**context):
-        db = db_factory(db_file=DEFAULTS["db_file"])
-        run_etl(db=db, **context["params"])
+        run_etl(**context["params"])
 
     @task.bash
     def generate_csv():

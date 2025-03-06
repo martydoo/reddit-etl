@@ -13,7 +13,7 @@ def run_etl(
     sub=DEFAULTS["sub"],
     sort_by=DEFAULTS["sort_by"],
     transformation=DEFAULTS["transformation"],
-    db=None,
+    db_file=DEFAULTS["db_file"],
 ):
     """
     Initiate ETL process.
@@ -24,7 +24,7 @@ def run_etl(
         sort_by (str): Sort method for posts. Defaults to `hot`.
         transformation (str): Defines which filter to apply to extracted data.
             Defaults to `zero` transformation.
-        db (DatabaseConnection): Database connection object.
+        db_file (str): Database file location.
     """
     logger.info("Starting ETL.")
 
@@ -32,8 +32,7 @@ def run_etl(
     client, pipeline = etl_factory(source)
 
     logger.info("Initializing database.")
-    if db is None:
-        db = db_factory()
+    db = db_factory(db_file=db_file)
 
     logger.info("Running pipeline.")
     pipeline.run(
