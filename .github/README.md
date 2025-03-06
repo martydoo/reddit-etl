@@ -30,10 +30,6 @@ After the ETL pipeline is run, the shell script, ```generate_csv.sh```, serves t
 
 A script, ```schema.py```, is also included to make schema creation and deletion easier.
 
-As stated before, ```cli.py``` can be run at any time. The DAG can be started through the Airflow UI.
-
-Docker eliminates need to install airflow separately, handles all dependencies and setup
-
 ## Setup
 Before running the pipeline, the database should be reset using:
 
