@@ -24,7 +24,7 @@ Accessible through both ```cli.py``` and ```dag.py```, the ```main.py``` module 
 
 ```transform.py``` contains four filters and another factory for easy return of the selected transformation function. ```zero_transformation()``` applies no filter to the posts passed to the function. ```random_transformation()``` selects five random submissions. ```discussion_transformation()``` filters for posts with at least one comment. ```popular_transformation()``` filters for posts with scores (upvotes) greater than two standard deviations above the mean.
 
-```etl.py``` contains the bulk of the code, returning a client object and a class, ```RedditETL```, which contains a method for each stage in the data pipeline. Data is extracted from Reddit using PRAW, Reddit's API wrapper for Python. Data stored in the ```RedditPostData``` dataclass include post ID, community name, title, score, URL, number of comments, creation datetime and post contents.
+```etl.py``` contains the bulk of the code, returning a client object and a class, ```RedditETL```, which contains a method for each stage in the data pipeline. Data is extracted from Reddit using PRAW, Reddit's API wrapper for Python. Data stored in the ```RedditPostData``` dataclass include post ID, community name, title, score, URL, number of comments, creation datetime, and post contents.
 
 After the ETL pipeline is run, the shell script, ```generate_csv.sh```, serves to automate the database backup process. If run using the DAG, this script will be executed following the data loading process.
 
@@ -56,10 +56,18 @@ Ctrl+C will shut down the Airflow service, and the Docker container can be stopp
 ```docker-compose down```
 
 ## Project Differences
-* Where does my project differ from original
+In the initial stages of the project, I followed the original code fairly closely. A few modifications were made to the filters applied, and I also added sort method functionality. I chose not to include tests or metadata generation, though I recognize the importance of these components. The original project also included an ETL pipeline for Twitter, which I skipped, and an associated abstract base class. I kept the ETL factory, though this was probably unnecessary given that Reddit is the only site my pipeline supports.
+
+The major differences began to emerge when I made the decision to implement Airflow as an orchestrator. I went back and forth about how to break my code up into DAG tasks, but ultimately ended up splitting the main module into ```main.py``` and ```cli.py```. This allows for increased flexibility, as the latter maintains command-line argument parsing and ```dag.py``` is able to use the same logic stored in ```main.py``` in the form of a task. Using decorators to define the DAG and its tasks through the TaskFlow API was new to me, but I figured it wouldn't be a bad idea to familiarize myself as this appears to be the more modern and recommended approach.
+
+My project also uses Docker, unlike the original. I chose to do this partly due to the Airflow integration, but I mostly wanted hands-on experience with containerization.
 
 ## Challenges & Future Iterations
-* Components I wish to extend
+Funnily enough, the most difficult part of this project was learning how to package my modules and work with Docker. Prior to this, most of my projects have been limited to one or two scripts, so dealing with so many files and directories was a learning experience in itself. Creating the Dockerfile also took a lot of trial and error, but I eventually got it to function how I wanted it to. Setting up relative paths to ensure compatibility with both the CLI and DAG was also tough, because I was set on having Airflow generate CSVs in the project's output folder.
+
+Though I'm happy with where it is currently, there's a ton of room for extension with this project. For one, more social media sites could be supported. As for the database, SQLite is sufficient for a project of this scale, but I would like to learn how to implement Airflow's PostgresOperator in the future. I contemplated using DuckDB, but didn't need the analytical efficiency it offers—again, it wouldn't have mattered given the scale, but it was still a consideration.
+
+It would be interesting to incorporate more SQL, or somehow email the CSV generated in each DAG run. S3 integration and handling streaming data also crossed my mind for future exploration.
 
 ## Acknowledgements
 Thank you to Joseph Machado for making the original project's repo publicly available, and for making data engineering feel so accessible through his [blog](https://www.startdataengineering.com/), even to a beginner like myself.
